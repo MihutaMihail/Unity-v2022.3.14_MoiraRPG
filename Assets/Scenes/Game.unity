@@ -368,13 +368,14 @@ GameObject:
   - component: {fileID: 194135106}
   - component: {fileID: 194135108}
   - component: {fileID: 194135107}
+  - component: {fileID: 194135109}
   m_Layer: 5
   m_Name: DialogueBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &194135106
 RectTransform:
   m_ObjectHideFlags: 0
@@ -435,6 +436,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 194135105}
   m_CullTransparentMesh: 1
+--- !u!95 &194135109
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194135105}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a423f34bdd277bc4b9e73ab53a92a1a7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &242914872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,6 +1396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1436144691}
   - component: {fileID: 1436144692}
+  - component: {fileID: 1436144693}
   m_Layer: 0
   m_Name: DialogManager
   m_TagString: Untagged
@@ -1408,6 +1431,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a11ff44c3934145b35665800790822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameText: {fileID: 2125881317}
+  dialogueText: {fileID: 429664808}
+  animator: {fileID: 194135109}
+--- !u!95 &1436144693
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436144690}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cef49c12e34c33c4aa0319d33c7c6a1a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1516507060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,7 +1707,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1847609714}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1436144692}
+        m_TargetAssemblyTypeName: Dialogue_Manager, Assembly-CSharp
+        m_MethodName: DisplayNextSentence
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1847609714
 MonoBehaviour:
   m_ObjectHideFlags: 0
