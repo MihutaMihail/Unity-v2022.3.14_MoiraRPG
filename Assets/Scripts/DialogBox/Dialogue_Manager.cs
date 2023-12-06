@@ -12,8 +12,7 @@ public class Dialogue_Manager : MonoBehaviour
     public Animator animator;
 
     // Private
-    // Queue is a FIFO (First-in, First-out)
-    // First element added is first element removed
+    // Queue is a FIFO (First-in, First-out), first element added is first element removed
     private Queue<string> sentences;
     
     void Start()
@@ -31,12 +30,12 @@ public class Dialogue_Manager : MonoBehaviour
 
         sentences.Clear();
 
-        // Iterate through every sentence
+        // Iterate through every sentence to display them afterwards in DisplayNextSentence()
         foreach (string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }
-
+        
         DisplayNextSentence();
     }
 
@@ -48,7 +47,8 @@ public class Dialogue_Manager : MonoBehaviour
             EndDialog();
             return;
         }
-
+        
+        // Removes and returns the first element from the Queue
         string sentence = sentences.Dequeue();
 
         // Stop all coroutines in case the player skips dialogue before finishing
@@ -59,7 +59,7 @@ public class Dialogue_Manager : MonoBehaviour
     }
 
     // Creates a sequence of values one at a time
-    // In this case, it reveals letter one by one
+    // In this case, it reveals letters one by one
     IEnumerator TypeSentence (string sentence)
     {
         dialogueText.text = "";
@@ -79,5 +79,6 @@ public class Dialogue_Manager : MonoBehaviour
     public void EndDialog()
     {
         animator.SetBool("isOpen", false);
+        Cursor.visible = false;
     }
 }
