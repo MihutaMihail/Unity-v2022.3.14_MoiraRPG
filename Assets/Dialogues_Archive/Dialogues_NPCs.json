@@ -1,0 +1,20 @@
+{
+    "NPCs": [
+        {
+            "name": "The Archer",
+            "folder": "NPC_Archer",
+            "dialoguesFiles": [
+                "Dialogue_1",
+                "Dialogue_2"
+            ]
+        },
+        {
+            "name": "The Wizard",
+            "folder": "NPC_Wizard",
+            "dialoguesFiles": [
+                "Dialogue_1",
+                "Dialogue_2"
+            ]
+        }
+    ]
+}
