@@ -4,10 +4,7 @@ using UnityEngine;
 using UnityEditor; // To add things like [MenuItem()]
 
 public class JSON_Writer : MonoBehaviour
-{
-    // Private
-    private List<NPCData> npcList;
-    
+{   
     // Create custom inspector for unity
     [MenuItem("Custom/Generate NPC JSON File")]
     public static void GenerateNPCJSONFile()
