@@ -10,7 +10,16 @@ public class Dialogue_Trigger : MonoBehaviour
     // It serves the purpose of starting the conversation
     public void TriggerDialogue()
     {
-        FindObjectOfType<Dialogue_Manager>().StartDialogue(dialogue);
+        // Setup
         Cursor.visible = true;
+
+        // Load dialogue master
+        dialogue.LoadDialogueMaster();  
+
+        // Load next dialogue file
+        dialogue.LoadNextDialogueFile();
+
+        // Start Dialogue
+        FindObjectOfType<Dialogue_Manager>().StartDialogue(dialogue);
     }
 }

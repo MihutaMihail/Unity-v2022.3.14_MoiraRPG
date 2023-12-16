@@ -30,7 +30,7 @@ public class NPC_Dialogue : MonoBehaviour
     {
         if (collision.CompareTag("Player") && playerInZone)
         {
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 GetComponent<Dialogue_Trigger>().TriggerDialogue();
             }

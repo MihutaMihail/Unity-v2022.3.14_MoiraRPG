@@ -401,7 +401,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7aa12b6ea16d6a47b333c1273bf6af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialoguesJson: {fileID: 4900000, guid: 52c5c812d0d76fe409ae8d34003a6c92, type: 3}
 --- !u!1 &194135105
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +745,7 @@ GameObject:
   - component: {fileID: 355298337}
   - component: {fileID: 355298339}
   - component: {fileID: 355298341}
-  - component: {fileID: 355298340}
+  - component: {fileID: 355298343}
   - component: {fileID: 355298342}
   m_Layer: 0
   m_Name: NPC
@@ -867,24 +866,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &355298340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 355298336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ddd17d5af2230547a2618ff8e624bc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue:
-    name: Bob the Builder
-    sentences:
-    - Hey, my name is Bob the Builder...
-    - I like to build stuff...
-    - Mario and Luigi are my friends
 --- !u!61 &355298341
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -942,6 +923,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50be8cb0d0a170c4dbe5569f4a3253ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &355298343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355298336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ddd17d5af2230547a2618ff8e624bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: Bob
 --- !u!1 &429664806
 GameObject:
   m_ObjectHideFlags: 0

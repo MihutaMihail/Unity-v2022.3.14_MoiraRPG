@@ -3,6 +3,7 @@
         {
             "name": "Bob",
             "directory": "NPC_Archer/",
+            "dialogueMaster": "DialogueMaster",
             "dialoguesFiles": [
                 "Quest1_Start",
                 "Quest1_End"
@@ -11,9 +12,11 @@
         {
             "name": "Mario",
             "directory": "NPC_Wizard/",
+            "dialogueMaster": "DialogueMaster",
             "dialoguesFiles": [
                 "Quest2_Start",
-                "Quest2_End, Quest2_End2"
+                "Quest2_End",
+                "Quest2_End2"
             ]
         }
     ]

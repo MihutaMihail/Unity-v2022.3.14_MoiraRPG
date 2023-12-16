@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEditor; // To add things like [MenuItem()]
+using System;
 
 public class JSON_Writer : MonoBehaviour
 {
-    private static string dialogueDirectory = Path.Combine(Application.dataPath, "Dialogues_Archive/");
+    public static string dialogueDirectory = Path.Combine(Application.dataPath, "Dialogues_Archive/");
+    public static string dialogueMaster = "DialogueMaster";
 
     // Create custom inspector for unity
     [MenuItem("Custom/Generate NPC JSON File")]
@@ -19,6 +21,7 @@ public class JSON_Writer : MonoBehaviour
         {
             name = "Bob",
             directory = "NPC_Archer/",
+            dialogueMaster = dialogueMaster,
             dialoguesFiles = new string[] { "Quest1_Start", "Quest1_End" }
         });
 
@@ -26,7 +29,8 @@ public class JSON_Writer : MonoBehaviour
         {
             name = "Mario",
             directory = "NPC_Wizard/",
-            dialoguesFiles = new string[] { "Quest2_Start", "Quest2_End, Quest2_End2" }
+            dialogueMaster = dialogueMaster,
+            dialoguesFiles = new string[] { "Quest2_Start", "Quest2_End", "Quest2_End2" }
         });
 
         // Serialize to JSON
@@ -35,7 +39,7 @@ public class JSON_Writer : MonoBehaviour
         // JSON file saving path
         string jsonFileName = "Dialogues_NPCs.json";
         string fullPath = Path.Combine(dialogueDirectory, jsonFileName);
-
+        
         // Write JSON file
         File.WriteAllText(fullPath, json);
 
@@ -53,16 +57,31 @@ public class JSON_Writer : MonoBehaviour
             // Create directory
             Directory.CreateDirectory(npcDirPath);
 
+            // Create dialogue master list
+            List<string> dialogueMasterContent = new List<string>();
+
             // Create dialogue files inside directory
             foreach (string dialogueFile in npcData.dialoguesFiles)
             {
                 // Create dialogue file path
                 string dialogueFilePath = Path.Combine(npcDirPath, dialogueFile + ".txt");
 
+                // Add file to dialogue master
+                dialogueMasterContent.Add(dialogueFile);
+
                 // Create empty file
                 File.WriteAllText(dialogueFilePath, "");
+
             }
 
+            // Get dialogue master path
+            string dialogueMasterPath = Path.Combine(npcDirPath, dialogueMaster + ".txt");
+
+            // Join the list items into a single string
+            string dialogueMasterContentString = string.Join(Environment.NewLine, dialogueMasterContent);
+
+            // Create dialogue master file
+            File.WriteAllText(dialogueMasterPath, dialogueMasterContentString);
         }
     }
 }

@@ -25,11 +25,11 @@ public class Dialogue_Manager : MonoBehaviour
         animator.SetBool("isOpen", true);
 
         nameText.text = dialogue.name;
-
+        
         sentences.Clear();
 
         // Iterate through every sentence to display them afterwards in DisplayNextSentence()
-        foreach (string sentence in dialogue.sentences)
+        foreach (string sentence in dialogue.Sentences)
         {
             sentences.Enqueue(sentence);
         }
