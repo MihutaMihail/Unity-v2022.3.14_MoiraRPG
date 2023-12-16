@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Script_Player_Input : MonoBehaviour
 {
-    // Public
     public float moveSpeed;
 
-    // Private
     private Script_Player_Movement ScriptPlayerMovement;
 
     void Awake()

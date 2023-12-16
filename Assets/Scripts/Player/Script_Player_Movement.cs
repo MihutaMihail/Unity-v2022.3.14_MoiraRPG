@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Script_Player_Movement : MonoBehaviour
 {
-    // Private
     private Rigidbody2D rb;
 
     void Start()

@@ -2,6 +2,6 @@
 public class NPCData
 {
     public string name;
-    public string folder;
+    public string directory;
     public string[] dialoguesFiles;
 }

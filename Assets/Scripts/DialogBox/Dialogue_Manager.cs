@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class Dialogue_Manager : MonoBehaviour
 {
-    // Public
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
     public Animator animator;
 
-    // Private
     // Queue is a FIFO (First-in, First-out), first element added is first element removed
     private Queue<string> sentences;
     

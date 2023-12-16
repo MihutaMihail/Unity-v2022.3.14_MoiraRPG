@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Script_Enemy_Follow : MonoBehaviour
 {
-    // Public
     public float moveSpeed;
     public Color attackColor;
 
-    // Private
     private const float ReturnThreshold = 0.1f;
 
     private Rigidbody2D rigidBody;
