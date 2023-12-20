@@ -21,11 +21,9 @@ public class JSON_Reader : MonoBehaviour
     // Return NPCData from npcList to their respective NPC
     public static NPCData GetNPCDataForDialogue(Dialogue dialogue)
     {
-        string npcName = dialogue.name;
-
         foreach (NPCData npcData in npcList.NPCs)
         {
-            if (npcData.name == npcName)
+            if (npcData.name == dialogue.name)
             {
                 return npcData;
             }

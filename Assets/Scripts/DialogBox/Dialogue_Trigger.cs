@@ -15,7 +15,8 @@ public class Dialogue_Trigger : MonoBehaviour
         Cursor.visible = true;
 
         // Load next dialogue file
-        dialogue.LoadNextDialogueFile();
+        // (TEMP) this should be put somewhere in the quests / gameManager
+        // dialogue.LoadNextDialogueFile();
         
         // Start Dialogue
         FindObjectOfType<Dialogue_Manager>().StartDialogue(dialogue);
