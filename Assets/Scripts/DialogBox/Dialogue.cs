@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -8,36 +6,76 @@ public class Dialogue
 {
     public string name;
 
+    private NPCData npcData;
     private string[] dialogueMaster;
     private int indexOrder;
     private string[] sentences;
 
+    // NPCData 
+    public NPCData NPCData
+    {
+        get { return this.npcData; }
+        set { this.npcData = value; }
+    }
+
+    // DialogueMaster
     public string[] DialogueMaster
     {
         get { return this.dialogueMaster; }
         set { this.dialogueMaster = value; }
     }
 
+    // IndexOrder
     public int IndexOrder
     {
         get { return this.indexOrder; }
         set { this.indexOrder = value; }
     }
 
+    // Sentences
     public string[] Sentences
     {
         get { return this.sentences; }
         set { this.sentences = value; }
     }
 
+    public void GetNPCData()
+    {
+        NPCData = JSON_Reader.GetNPCDataForDialogue(this);
+    }
+    
     public void LoadDialogueMaster()
     {
-        DialogueMaster = JSON_Reader.GetDialogueMaster(this);
-    }
+        // Create NPC directory path
+        string npcDirPath = Path.Combine(JSON_Writer.dialogueDirectory, NPCData.directory);
 
+        // Create dialogue master file path
+        string dialogueMasterPath = Path.Combine(npcDirPath, JSON_Writer.dialogueMasterName + ".txt");
+
+        // Read the content of the dialogue master file
+        if (File.Exists(dialogueMasterPath))
+        {
+            DialogueMaster = File.ReadAllLines(dialogueMasterPath);
+        }
+    }
     public void LoadNextDialogueFile()
     {
-        Sentences = JSON_Reader.LoadNextDialogueFile(this);
-        IndexOrder += 1;
+        // Create NPC directory path
+        string npcDirPath = Path.Combine(JSON_Writer.dialogueDirectory, NPCData.directory);
+        
+        // Create next dialogue file path
+        string dialogueMasterNextFile = dialogueMaster[IndexOrder];
+        string nextDialogueFilePath = Path.Combine(npcDirPath, dialogueMasterNextFile + ".txt");
+
+        if (File.Exists(nextDialogueFilePath))
+        {
+            Sentences = File.ReadAllLines(nextDialogueFilePath);
+        }
+        
+        // Increase index to get next file
+        if (IndexOrder < DialogueMaster.Length - 1)
+        {
+            IndexOrder += 1;
+        }
     }
 }
