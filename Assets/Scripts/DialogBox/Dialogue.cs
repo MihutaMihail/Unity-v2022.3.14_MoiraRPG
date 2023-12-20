@@ -5,7 +5,7 @@ using UnityEngine;
 public class Dialogue
 {
     public string name;
-
+    
     private NPCData npcData;
     private string[] dialogueMaster;
     private int indexOrder;

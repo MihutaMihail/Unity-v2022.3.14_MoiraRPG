@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Dialogue_Manager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class Dialogue_Manager : MonoBehaviour
         
         sentences.Clear();
 
-        // Iterate through every sentence to display them afterwards in DisplayNextSentence()
+        // Enqueue every sentence for them to be displayed later in DisplayNextSentence()
         foreach (string sentence in dialogue.Sentences)
         {
             sentences.Enqueue(sentence);
@@ -36,13 +37,13 @@ public class Dialogue_Manager : MonoBehaviour
         
         DisplayNextSentence();
     }
-
+    
     public void DisplayNextSentence()
     {
         // If no more sentences to read, end dialogue
         if (sentences.Count == 0)
         {
-            EndDialog();
+            EndDialogue();
             return;
         }
         
@@ -74,7 +75,7 @@ public class Dialogue_Manager : MonoBehaviour
     }
     
     // End dialogue by hiding the dialogue box
-    public void EndDialog()
+    public void EndDialogue()
     {
         animator.SetBool("isOpen", false);
         Cursor.visible = false;

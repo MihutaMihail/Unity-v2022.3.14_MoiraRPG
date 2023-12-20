@@ -27,5 +27,8 @@ public class Script_Player_Input : MonoBehaviour
         if (Input.GetKey(KeyCode.Z)) dir.y = 1; // Up
 
         ScriptPlayerMovement.PlayerMovement(dir, moveSpeed);
+
+        // Dash / Dodge
+        if (Input.GetKey(KeyCode.LeftShift)) ScriptPlayerMovement.PlayerDash(dir, moveSpeed);
     }
 }

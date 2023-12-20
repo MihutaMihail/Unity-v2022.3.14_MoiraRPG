@@ -7,9 +7,17 @@ using UnityEngine;
 public class NPC_Dialogue : MonoBehaviour
 {
     private bool playerInZone = false;
-    
+
+    void Update()
+    {
+        if (playerInZone && Input.GetKeyDown(KeyCode.E))
+        {
+            GetComponent<Dialogue_Trigger>().TriggerDialogue();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
-    {   
+    {
         if (collision.CompareTag("Player"))
         {
             playerInZone = true;
@@ -21,14 +29,6 @@ public class NPC_Dialogue : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerInZone = false;
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && playerInZone && Input.GetKeyDown(KeyCode.E)) 
-        {
-            GetComponent<Dialogue_Trigger>().TriggerDialogue();  
         }
     }
 }

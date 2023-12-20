@@ -12,11 +12,11 @@ public class Dialogue_Trigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        Cursor.visible = true;  
+        Cursor.visible = true;
 
         // Load next dialogue file
         dialogue.LoadNextDialogueFile();
-
+        
         // Start Dialogue
         FindObjectOfType<Dialogue_Manager>().StartDialogue(dialogue);
     }
