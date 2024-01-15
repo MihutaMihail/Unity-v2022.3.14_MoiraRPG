@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Script_Enemy_Attack : MonoBehaviour
 {
-
+    public Color attackColor;
 }

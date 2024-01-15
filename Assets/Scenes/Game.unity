@@ -170,7 +170,6 @@ GameObject:
   - component: {fileID: 128515146}
   - component: {fileID: 128515149}
   - component: {fileID: 128515148}
-  - component: {fileID: 128515152}
   - component: {fileID: 128515151}
   - component: {fileID: 128515150}
   m_Layer: 0
@@ -333,18 +332,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &128515151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128515145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a51820b967214e4394fdd0ff1a517e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &128515152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -516,6 +503,7 @@ GameObject:
   - component: {fileID: 242914878}
   - component: {fileID: 242914877}
   - component: {fileID: 242914876}
+  - component: {fileID: 242914880}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -660,7 +648,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  attackColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!61 &242914878
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -733,6 +720,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &242914880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242914872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1662bbd98eb5b6e4ca938bed1469d38c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &355298336
 GameObject:
   m_ObjectHideFlags: 0
