@@ -7,11 +7,13 @@ using UnityEngine;
 public class NPC_Dialogue : MonoBehaviour
 {
     private bool playerInZone = false;
+    private bool canInitiateDialogue = true;
 
     void Update()
     {
-        if (playerInZone && Input.GetKeyDown(KeyCode.E))
+        if (playerInZone && canInitiateDialogue && Input.GetKeyDown(KeyCode.E))
         {
+            canInitiateDialogue = false;
             GetComponent<Dialogue_Trigger>().TriggerDialogue();
         }
     }
@@ -29,6 +31,7 @@ public class NPC_Dialogue : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerInZone = false;
+            canInitiateDialogue = true;
         }
     }
 }
