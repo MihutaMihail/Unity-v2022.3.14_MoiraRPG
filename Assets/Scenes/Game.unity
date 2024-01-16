@@ -344,9 +344,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  dashingPower: 10
-  dashingTime: 1
-  dashingCooldown: 2
+  dashingPower: 15
+  dashingTime: 0.3
+  dashingCooldown: 1
 --- !u!1 &166154161
 GameObject:
   m_ObjectHideFlags: 0

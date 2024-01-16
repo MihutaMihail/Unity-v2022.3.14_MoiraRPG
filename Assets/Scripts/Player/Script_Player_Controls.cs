@@ -59,7 +59,7 @@ public class Script_Player_Controls : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, transform.localScale.y * dashingPower);
+        rb.velocity = new Vector2(movementVector.x * dashingPower, movementVector.y * dashingPower);
         yield return new WaitForSeconds(dashingTime);
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);

@@ -11,28 +11,24 @@ public class Dialogue
     private int indexOrder;
     private string[] sentences;
 
-    // NPCData 
     public NPCData NPCData
     {
         get { return this.npcData; }
         set { this.npcData = value; }
     }
 
-    // DialogueMaster
     public string[] DialogueMaster
     {
         get { return this.dialogueMaster; }
         set { this.dialogueMaster = value; }
     }
-
-    // IndexOrder
+    
     public int IndexOrder
     {
         get { return this.indexOrder; }
         set { this.indexOrder = value; }
     }
 
-    // Sentences
     public string[] Sentences
     {
         get { return this.sentences; }
