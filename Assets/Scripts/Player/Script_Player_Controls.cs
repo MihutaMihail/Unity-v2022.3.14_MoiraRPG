@@ -91,6 +91,20 @@ public class Script_Player_Controls : MonoBehaviour
         isDashing = false;
     }
     
+    private void DrainStamina(float staminaCost)
+    {
+        // Drain
+        stamina -= staminaCost;
+        if (stamina < 0) stamina = 0;
+
+        staminaBar.fillAmount = stamina / maxStamina;
+
+        // Recharge
+        // Ensure that there's only one coroutine happening
+        if (recharge != null) StopCoroutine(recharge);
+        recharge = StartCoroutine(StaminaRecharge());
+    }
+
     private IEnumerator StaminaRecharge()
     {
         yield return new WaitForSeconds(1f);
@@ -104,18 +118,6 @@ public class Script_Player_Controls : MonoBehaviour
             staminaBar.fillAmount = stamina / maxStamina;
             yield return new WaitForSeconds(0.1f);
         }
-    }
-
-    private void DrainStamina(float staminaCost)
-    {
-        stamina -= staminaCost;
-        if (stamina < 0) stamina = 0;
-        
-        staminaBar.fillAmount = stamina / maxStamina;
-
-        // Ensure that there's only one coroutine happening
-        if (recharge != null) StopCoroutine(recharge);
-        recharge = StartCoroutine(StaminaRecharge());
     }
     
     private bool EnoughStamina(float staminaCost)
