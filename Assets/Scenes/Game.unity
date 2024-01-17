@@ -343,15 +343,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec99be115683794a95be57ce13174e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  sprintSpeedMultiplier: 2
-  sprintCost: 5
-  dashingPower: 15
-  dashingTime: 0.3
-  dashingCost: 20
+  normalSpeed: 5
+  sprintSpeed: 10
+  sprintCost: 10
+  dashPower: 10
+  dashDuration: 0.3
+  dashCost: 20
   staminaBar: {fileID: 1389792477}
   stamina: 100
   maxStamina: 100
+  chargeRate: 20
 --- !u!1 &166154161
 GameObject:
   m_ObjectHideFlags: 0
