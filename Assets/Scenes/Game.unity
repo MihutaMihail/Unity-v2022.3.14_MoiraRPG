@@ -345,7 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSpeed: 5
   sprintSpeed: 10
-  sprintCost: 10
+  sprintCost: 15
   dashPower: 10
   dashDuration: 0.3
   dashCost: 20

@@ -5,22 +5,21 @@ using UnityEngine.UI;
 public class Script_Player_Controls : MonoBehaviour
 {
     // Movement
-    public float normalSpeed, sprintSpeed, sprintCost;
-    public float dashPower, dashDuration, dashCost;
+    public float normalSpeed = 5, sprintSpeed = 10, sprintCost = 15;
+    public float dashPower = 10f, dashDuration = 0.3f, dashCost = 20;
 
     // Stamina
     public Image staminaBar;
-    public float stamina, maxStamina, chargeRate;
+    public float stamina = 100f, maxStamina = 100f, chargeRate = 20f;
 
     private Vector2 movementVector;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private Coroutine recharge;
-
+    
     private bool playerMoving = true;
     private bool canDash = true, isDashing = false;
     private bool canSprint = true, isSprinting = false;
-    private bool isInvincible = false;
 
     void Start()
     {
@@ -82,28 +81,16 @@ public class Script_Player_Controls : MonoBehaviour
     {
         DrainStamina(dashCost);
 
-        // Temporarily disable dashing
         canDash = false;
-
         isDashing = true;
-        isInvincible = true;
-
-        // Change color during invincibility state (TEMP)
-        sr.color = Color.black;
 
         // Apply velocity for the dash in the specified direction
         rb.velocity = new Vector2(movementVector.x * dashPower, movementVector.y * dashPower);
 
         yield return new WaitForSeconds(dashDuration);
 
-        // Change color to original after dash ended (TEMP)
-        sr.color = Color.white;
-
-        isDashing = false;
-        isInvincible = false;
-        
-        // Enable dashing
         canDash = true;
+        isDashing = false;
     }
     
     private IEnumerator StaminaRecharge()
