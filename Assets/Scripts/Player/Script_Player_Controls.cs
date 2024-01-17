@@ -14,7 +14,6 @@ public class Script_Player_Controls : MonoBehaviour
 
     private Vector2 movementVector;
     private Rigidbody2D rb;
-    private SpriteRenderer sr;
     private Coroutine recharge;
     
     private bool playerMoving = true;
@@ -26,7 +25,6 @@ public class Script_Player_Controls : MonoBehaviour
         Cursor.visible = false;
 
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
