@@ -33,7 +33,7 @@ public class Script_Player_Controls : MonoBehaviour
     void Update()
     {
         if (isDashing) return;
-        ;
+        
         // Player direction
         movementVector = new Vector2(
             Input.GetAxisRaw("Horizontal"),
@@ -50,7 +50,7 @@ public class Script_Player_Controls : MonoBehaviour
             if (EnoughStamina(dashCost)) StartCoroutine(Dash());
         }
         
-        // Sprint 
+        // Sprint
         isSprinting = (Input.GetKey(KeyCode.LeftShift) && canSprint && playerMoving) ? true : false;
     }
 
@@ -67,13 +67,7 @@ public class Script_Player_Controls : MonoBehaviour
         // Player is sprinting
         if (isSprinting)
         {
-            // Decrease stamina
-            stamina -= sprintCost * Time.fixedDeltaTime;
-            staminaBar.fillAmount = stamina / maxStamina;
-
-            // Ensure that there's only one 'recharge' coroutine happening
-            if (recharge != null) StopCoroutine(recharge);
-            recharge = StartCoroutine(StaminaRecharge());
+            DrainStamina(sprintCost * Time.fixedDeltaTime);
 
             // Reset when not enough stamina
             if (stamina <= 0)
@@ -86,13 +80,7 @@ public class Script_Player_Controls : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        // Decrease stamina
-        stamina -= dashCost;
-        if (stamina < 0) stamina = 0;
-        staminaBar.fillAmount = stamina / maxStamina;
-
-        if (recharge != null) StopCoroutine(recharge);
-        recharge = StartCoroutine(StaminaRecharge());
+        DrainStamina(dashCost);
 
         // Temporarily disable dashing
         canDash = false;
@@ -131,6 +119,18 @@ public class Script_Player_Controls : MonoBehaviour
             staminaBar.fillAmount = stamina / maxStamina;
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    private void DrainStamina(float staminaCost)
+    {
+        stamina -= staminaCost;
+        if (stamina < 0) stamina = 0;
+        
+        staminaBar.fillAmount = stamina / maxStamina;
+
+        // Ensure that there's only one coroutine happening
+        if (recharge != null) StopCoroutine(recharge);
+        recharge = StartCoroutine(StaminaRecharge());
     }
     
     private bool EnoughStamina(float staminaCost)
