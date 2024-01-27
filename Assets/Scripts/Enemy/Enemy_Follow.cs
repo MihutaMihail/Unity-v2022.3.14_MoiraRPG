@@ -20,13 +20,13 @@ public class Enemy_Follow : MonoBehaviour
         );
     }
     
-    public void ReturnToStartingPosition(Vector2 startPosition, Rigidbody2D rb, float speed, float returnThreshold, ref bool isReturningToStartingPosition)
+    public bool ReturnToStartingPosition(Vector2 startPosition, Vector2 startDirection, Rigidbody2D rb, float speed)
     {
-        MoveToPosition(startPosition, rb, speed);
+        MoveToPosition(startDirection, rb, speed);
         
-        float distanceToStartingPosition = Vector2.Distance(transform.position, startPosition);
-        
-        if (distanceToStartingPosition < returnThreshold)
+        float distanceToStartingPosition = Vector2.Distance(startPosition, transform.position);
+
+        if (distanceToStartingPosition < 0.1f)
         {
             // Stop further movement
             rb.velocity = Vector2.zero;
@@ -34,8 +34,12 @@ public class Enemy_Follow : MonoBehaviour
             // Reset enemy to starting position
             transform.position = startPosition;
 
-            // Reset flag
-            isReturningToStartingPosition = false;
+            // Returning false will indicate to the enemy controller that the enemy has stopped moving
+            // and is not returning to its starting position anymore
+            return false;
         }
+
+        // Returning true to keep the enemy advance to its starting position
+        return true;
     }
 }
