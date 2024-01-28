@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Enemy_Follow : MonoBehaviour
 {
+    // Calculate the direction of an object in reference to the GameObject
     public Vector2 CalculateDirection(Vector3 targetPosition)
     {
         // Vector pointing from the enemy position to the target position
@@ -12,6 +13,7 @@ public class Enemy_Follow : MonoBehaviour
         return direction;
     }
     
+    // Move GameObject towards the specified position
     public void MoveToPosition(Vector2 direction, Rigidbody2D rb, float speed)
     {
         rb.MovePosition(
@@ -20,8 +22,10 @@ public class Enemy_Follow : MonoBehaviour
         );
     }
     
-    public bool ReturnToStartingPosition(Vector2 startPosition, Vector2 startDirection, Rigidbody2D rb, float speed)
+    // Return GameObject to inital starting position
+    public bool ReturnToStartingPosition(Vector2 startPosition, Rigidbody2D rb, float speed)
     {
+        Vector2 startDirection = CalculateDirection(startPosition);
         MoveToPosition(startDirection, rb, speed);
         
         float distanceToStartingPosition = Vector2.Distance(startPosition, transform.position);

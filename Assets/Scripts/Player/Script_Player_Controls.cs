@@ -44,7 +44,7 @@ public class Script_Player_Controls : MonoBehaviour
         // Dash
         if (Input.GetKeyDown(KeyCode.Space) && canDash && playerMoving)
         {
-            if (EnoughStamina(dashCost)) StartCoroutine(Dash());
+            if (EnoughStamina(dashCost)) StartCoroutine(DashCoroutine());
         }
         
         // Sprint
@@ -55,7 +55,6 @@ public class Script_Player_Controls : MonoBehaviour
     {
         if (isDashing) return;
 
-        // Calculate current player speed
         float currentMoveSpeed = isSprinting ? sprintSpeed : normalSpeed;
 
         // Set player current speed
@@ -75,7 +74,7 @@ public class Script_Player_Controls : MonoBehaviour
         }
     }
 
-    private IEnumerator Dash()
+    private IEnumerator DashCoroutine()
     {
         DrainStamina(dashCost);
 
