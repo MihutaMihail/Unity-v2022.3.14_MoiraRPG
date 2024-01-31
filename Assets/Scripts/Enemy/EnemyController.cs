@@ -71,7 +71,7 @@ public class EnemyController : MonoBehaviour
         if (inDistanceToAttack && canAttack)
         {
             isAttackingPlayer = true;
-            enemyAttack.AttackPlayer();
+            StartCoroutine(enemyAttack.AttackCoroutine());
         }
     }
 

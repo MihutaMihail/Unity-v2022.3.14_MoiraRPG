@@ -8,6 +8,7 @@ public class Enemy_Attack : MonoBehaviour
     public float attackDuration = 1f;
     public float backwardsDistance = 1f;
     public float shakeIntensity = 0.15f;
+    public float shakeThreshold = 0.8f;
 
     /*
      * In C#, delegates and events work together to establish a subscription system. 
@@ -29,14 +30,9 @@ public class Enemy_Attack : MonoBehaviour
     */
     public delegate void AttackCompleteEventHandler();
     public event AttackCompleteEventHandler OnAttackComplete;
-    public Vector2 playerDirection { get; set; }
+    public Vector3 playerDirection { get; set; }
     
-    public void AttackPlayer()
-    {
-        StartCoroutine(AttackCoroutine()); 
-    }
-    
-    private IEnumerator AttackCoroutine()
+    public IEnumerator AttackCoroutine()
     {
         float elapsedTime = 0f;
         Vector3 initialPosition = transform.position;
@@ -47,10 +43,9 @@ public class Enemy_Attack : MonoBehaviour
             
             float t = EaseInOutQuad(elapsedTime / chargeAttackDuration);
 
-            // replace transform.right with something of the player direction
-            transform.position = Vector3.Lerp(initialPosition, initialPosition + transform.right * backwardsDistance, t);
+            transform.position = Vector3.Lerp(initialPosition, initialPosition + -playerDirection * backwardsDistance, t);
 
-            if (t > 0.8f)
+            if (t > shakeThreshold)
             {
                 float randomX = Random.Range(-shakeIntensity, shakeIntensity);
                 float randomY = Random.Range(-shakeIntensity, shakeIntensity);
@@ -58,7 +53,7 @@ public class Enemy_Attack : MonoBehaviour
             }
             yield return null;
         }
-
+        
         PerformDash();
         
         yield return new WaitForSeconds(attackDuration);
