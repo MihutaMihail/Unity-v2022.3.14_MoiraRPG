@@ -645,8 +645,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a62f5cbc805ec043a0819c93f6f3d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  distanceToAttackPlayer: 2
+  speed: 5
+  distanceToAttackPlayer: 4
+  attackCooldown: 2
 --- !u!114 &242914877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,6 +744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1662bbd98eb5b6e4ca938bed1469d38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chargeAttackDuration: 1
+  attackDuration: 0.5
 --- !u!1 &355298336
 GameObject:
   m_ObjectHideFlags: 0
