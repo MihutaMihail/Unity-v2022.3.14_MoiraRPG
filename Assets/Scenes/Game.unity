@@ -745,7 +745,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeAttackDuration: 1
-  attackDuration: 0.5
+  attackDuration: 1
+  backwardsDistance: 2
+  shakeIntensity: 0.15
 --- !u!1 &355298336
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,9 @@ using UnityEngine;
 public class Enemy_Attack : MonoBehaviour
 {
     public float chargeAttackDuration = 1f;
-    public float attackDuration = 0.5f;    
+    public float attackDuration = 1f;
+    public float backwardsDistance = 1f;
+    public float shakeIntensity = 0.15f;
 
     /*
      * In C#, delegates and events work together to establish a subscription system. 
@@ -20,7 +22,7 @@ public class Enemy_Attack : MonoBehaviour
      * delegate, meaning that multiple events can be constructed from the same delegate.
      * It allows other parts of the code to subscribe and be notified when an  attack is complete.
      * 
-     * The .Invoke() function is used to notify all subscribers about the completion 
+     * The .Invoke() function is used to notify all subscribers about the completion
      * of the enemy attack. It's a mechanism for communication between objects.
      * 
      * Remember, you can create multiple events based on the same delegate.
@@ -31,29 +33,49 @@ public class Enemy_Attack : MonoBehaviour
     
     public void AttackPlayer()
     {
-        StartCoroutine(AttackCoroutine());
+        StartCoroutine(AttackCoroutine()); 
     }
     
     private IEnumerator AttackCoroutine()
     {
         float elapsedTime = 0f;
-        float rotationDuration = chargeAttackDuration;
+        Vector3 initialPosition = transform.position;
 
-        Quaternion startRotation = transform.rotation;
-        Quaternion targetRotation = Quaternion.Euler(0f, 0f, -90f);
-
-        while (elapsedTime < rotationDuration)
+        while (elapsedTime < chargeAttackDuration)
         {
-            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime / rotationDuration);
             elapsedTime += Time.deltaTime;
+            
+            float t = EaseInOutQuad(elapsedTime / chargeAttackDuration);
+
+            // replace transform.right with something of the player direction
+            transform.position = Vector3.Lerp(initialPosition, initialPosition + transform.right * backwardsDistance, t);
+
+            if (t > 0.8f)
+            {
+                float randomX = Random.Range(-shakeIntensity, shakeIntensity);
+                float randomY = Random.Range(-shakeIntensity, shakeIntensity);
+                transform.position += new Vector3(randomX, randomY, 0);
+            }
             yield return null;
         }
-        
-        // Apply velocity for the attack in the specified direction
-        GetComponent<Rigidbody2D>().velocity = new Vector2(playerDirection.x * 15, playerDirection.y * 15);
+
+        PerformDash();
         
         yield return new WaitForSeconds(attackDuration);
         
         OnAttackComplete?.Invoke();
     }
+
+    private void PerformDash()
+    {
+        GetComponent<Rigidbody2D>().velocity = new Vector2(playerDirection.x * 15, playerDirection.y * 15);
+    }
+
+    // Custom Easing function (Quadratic InOut)
+    // See link for visualisation of the QuadEaseInOut curve
+    // https://forum.unity.com/attachments/graphanimation_1024-gif.240277/
+    private float EaseInOutQuad(float t)
+    {
+        return t < 0.5f ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    } 
 }

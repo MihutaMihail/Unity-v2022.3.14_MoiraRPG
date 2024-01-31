@@ -58,11 +58,12 @@ public class EnemyController : MonoBehaviour
              */
             enemyAttack.playerDirection = playerDirection;
 
-            if (Time.time > lastAttackTime + attackCooldown)
+            if (IsAttackReady()) 
                 canAttack = true;
         }
-
-        if (isAttackingPlayer) return;
+        
+        if (isAttackingPlayer)
+            return;
         
         if (isFollowingPlayer)
             inDistanceToAttack = (DistanceToPlayer() < distanceToAttackPlayer) ? true : false;
@@ -76,7 +77,8 @@ public class EnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isAttackingPlayer) return;
+        if (isAttackingPlayer) 
+             return;
 
         if (isFollowingPlayer)
             enemyFollow.MoveToPosition(playerDirection, rb, speed);
@@ -112,6 +114,11 @@ public class EnemyController : MonoBehaviour
     private float DistanceToPlayer()
     {
         return Vector2.Distance(player.position, transform.position);
+    }
+
+    private bool IsAttackReady()
+    {
+        return Time.time > lastAttackTime + attackCooldown;
     }
 
     //
