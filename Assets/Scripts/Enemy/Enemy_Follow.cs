@@ -43,7 +43,7 @@ public class Enemy_Follow : MonoBehaviour
             return false;
         }
 
-        // Returning true to keep the enemy advance to its starting position
+        // Returning true to keep the enemy advancing to its starting position
         return true;
     }
 }

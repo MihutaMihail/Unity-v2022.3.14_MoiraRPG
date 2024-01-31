@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float speed = 3;
-    public float distanceToAttackPlayer = 1f;
+    public float distanceToAttackPlayer = 2f;
 
     private Enemy_Follow enemyFollow;
     private Enemy_Attack enemyAttack;
@@ -20,8 +20,6 @@ public class EnemyController : MonoBehaviour
     private bool isReturningToStartingPosition = false;
     private bool canAttack = false;
     private bool isAttackingPlayer = false;
-
-    private bool test = true;
 
     //
     // START
@@ -60,10 +58,10 @@ public class EnemyController : MonoBehaviour
         
         if (isFollowingPlayer) canAttack = (DistanceToPlayer() < distanceToAttackPlayer) ? true : false;
         
-        if (canAttack && test)
+        if (canAttack)
         {
-            test = false;
-            isAttackingPlayer = true; 
+            isAttackingPlayer = true;
+            canAttack = false;
             enemyAttack.AttackPlayer();
         }
     }
@@ -115,6 +113,10 @@ public class EnemyController : MonoBehaviour
     private void HandleAttackComplete()
     {
         isAttackingPlayer = false;
+        
+        // Reset enemy status
+        rb.velocity = Vector2.zero;
+        transform.rotation = Quaternion.identity;
     }
 
     //

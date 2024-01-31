@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy_Attack : MonoBehaviour
 {
+    public float chargeAttackDuration = 1f;
+    public float attackDuration = 1f;
+
     // Declare a delegate for the event
     public delegate void AttackCompleteEventHandler();
 
@@ -20,7 +23,7 @@ public class Enemy_Attack : MonoBehaviour
     private IEnumerator AttackCoroutine()
     {
         float elapsedTime = 0f;
-        float rotationDuration = 1f;
+        float rotationDuration = chargeAttackDuration;
 
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0f, 0f, -90f);
@@ -31,14 +34,12 @@ public class Enemy_Attack : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        // Apply velocity for the attack in the specified direction
-        GetComponent<Rigidbody2D>().velocity = new Vector2(playerDirection.x * 10, playerDirection.y * 10);
-
-        yield return new WaitForSeconds(1f);
         
-        transform.rotation = startRotation;
-
+        // Apply velocity for the attack in the specified direction
+        GetComponent<Rigidbody2D>().velocity = new Vector2(playerDirection.x * 15, playerDirection.y * 15);
+        
+        yield return new WaitForSeconds(attackDuration);
+        
         OnAttackComplete?.Invoke();
     }
 }

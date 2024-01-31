@@ -7,7 +7,7 @@ using UnityEngine;
 public class NPC_Dialogue : MonoBehaviour
 {
     private bool playerInZone = false;
-    private bool canInitiateDialogue = true;
+    private bool canInitiateDialogue = false;
 
     void Update()
     {
@@ -23,6 +23,7 @@ public class NPC_Dialogue : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerInZone = true;
+            canInitiateDialogue = true;
         }
     }
 
@@ -31,7 +32,7 @@ public class NPC_Dialogue : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerInZone = false;
-            canInitiateDialogue = true;
+            canInitiateDialogue = false;
         }
     }
 }

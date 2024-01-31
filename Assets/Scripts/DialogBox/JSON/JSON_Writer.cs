@@ -62,26 +62,26 @@ public class JSON_Writer : MonoBehaviour
             
             // This is where we'll stock every dialogue file name in order
             List<string> dialogueMasterList = new List<string>();
-
+            
             // Create dialogue files inside directory
             foreach (string dialogueFile in npcData.dialoguesFiles)
             {
                 // Create dialogue file path
                 string dialogueFilePath = Path.Combine(npcDirPath, dialogueFile + ".txt");
-
+                
                 // Create empty file
                 if (!File.Exists(dialogueFilePath))
                 {
                     File.WriteAllText(dialogueFilePath, "");
                 }
-
+                
                 // Add file to dialogue master
                 dialogueMasterList.Add(dialogueFile);
             }
 
             // Create dialogue master path
-            string dialogueMasterPath = Path.Combine(npcDirPath, dialogueDirectory + ".txt");
-
+            string dialogueMasterPath = Path.Combine(npcDirPath, "DialogueMaster" + ".txt");
+            
             // Join the list items into a single string
             string dialogueMasterListString = string.Join(Environment.NewLine, dialogueMasterList);
 
