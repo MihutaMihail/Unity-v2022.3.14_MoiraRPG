@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Enemy_Attack : MonoBehaviour
 {
-    public float chargeAttackDuration = 1f;
     public float attackDuration = 1f;
+    public float dashSpeed = 15f;
+
+    public float chargeAttackDuration = 1f;
     public float backwardsDistance = 1f;
+
     public float shakeIntensity = 0.15f;
     public float shakeThreshold = 0.8f;
 
@@ -32,6 +35,7 @@ public class Enemy_Attack : MonoBehaviour
     public event AttackCompleteEventHandler OnAttackComplete;
     public Vector3 playerDirection { get; set; }
     
+    // Start enemy attack coroutine
     public IEnumerator AttackCoroutine()
     {
         float elapsedTime = 0f;
@@ -41,10 +45,13 @@ public class Enemy_Attack : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             
-            float t = EaseInOutQuad(elapsedTime / chargeAttackDuration);
+            // Refer to function description for details
+            float t = EaseOutCubic(elapsedTime / chargeAttackDuration);
 
+            // Smoothly changing the position (backwards) based on t (time)
             transform.position = Vector3.Lerp(initialPosition, initialPosition + -playerDirection * backwardsDistance, t);
 
+            // If a certain amount of time has passed, add "shake" effect
             if (t > shakeThreshold)
             {
                 float randomX = Random.Range(-shakeIntensity, shakeIntensity);
@@ -58,19 +65,23 @@ public class Enemy_Attack : MonoBehaviour
         
         yield return new WaitForSeconds(attackDuration);
         
+        // Call subscribers
         OnAttackComplete?.Invoke();
     }
 
+    // Perform a dash as to attack the player
     private void PerformDash()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(playerDirection.x * 15, playerDirection.y * 15);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(playerDirection.x * dashSpeed, playerDirection.y * dashSpeed);
     }
 
-    // Custom Easing function (Quadratic InOut)
-    // See link for visualisation of the QuadEaseInOut curve
+    // Easing function (Cubic Out)
+    // See link for visualisation of the CubicEaseOut curve
     // https://forum.unity.com/attachments/graphanimation_1024-gif.240277/
-    private float EaseInOutQuad(float t)
+    // The point is to have a "charging up" effect, where it starts fast, but ends slow
+    private float EaseOutCubic(float t)
     {
-        return t < 0.5f ? 2 * t * t : -1 + (4 - 2 * t) * t;
-    } 
+        t = t - 1;
+        return t * t * t + 1;
+    }
 }

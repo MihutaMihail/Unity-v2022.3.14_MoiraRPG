@@ -744,8 +744,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1662bbd98eb5b6e4ca938bed1469d38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeAttackDuration: 1
   attackDuration: 1
+  dashSpeed: 15
+  chargeAttackDuration: 1
   backwardsDistance: 2
   shakeIntensity: 0.15
   shakeThreshold: 0.8
