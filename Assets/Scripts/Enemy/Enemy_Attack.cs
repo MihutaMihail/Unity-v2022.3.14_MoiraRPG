@@ -45,15 +45,15 @@ public class Enemy_Attack : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             
-            // Refer to function description for details
+            // Calculate interpolation factor using cubic easing function
             float t = EaseOutCubic(elapsedTime / chargeAttackDuration);
 
-            // Smoothly changing the position (backwards) based on t (time)
+            // Smoothly move the GameObject based on the interpolation factor
             transform.position = Vector3.Lerp(initialPosition, initialPosition + -playerDirection * backwardsDistance, t);
 
-            // If a certain amount of time has passed, add "shake" effect
             if (t > shakeThreshold)
             {
+                // Add random shake effect within specified intensity
                 float randomX = Random.Range(-shakeIntensity, shakeIntensity);
                 float randomY = Random.Range(-shakeIntensity, shakeIntensity);
                 transform.position += new Vector3(randomX, randomY, 0);
@@ -61,27 +61,48 @@ public class Enemy_Attack : MonoBehaviour
             yield return null;
         }
         
-        PerformDash();
-        
-        yield return new WaitForSeconds(attackDuration);
-        
-        // Call subscribers
+        yield return StartCoroutine(PerformDashCoroutine());
+
+        // Call subscribers to signal completion of the attack
         OnAttackComplete?.Invoke();
     }
 
     // Perform a dash as to attack the player
-    private void PerformDash()
+    private IEnumerator PerformDashCoroutine()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(playerDirection.x * dashSpeed, playerDirection.y * dashSpeed);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        float elapsedTime = 0f;
+        Vector2 currentPlayerDirection = playerDirection;
+        
+        while (elapsedTime < attackDuration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            // Calculate easing factor for dash movement
+            float dashEaseFactor = EaseOutQuint(elapsedTime / attackDuration);
+
+            // Set the velocity of the Rigidbody2D with easing for dashing towards the player
+            rb.velocity = new Vector2(currentPlayerDirection.x * dashSpeed * dashEaseFactor, currentPlayerDirection.y * dashSpeed * dashEaseFactor);
+
+            yield return null;
+        }
     }
+
 
     // Easing function (Cubic Out)
     // See link for visualisation of the CubicEaseOut curve
     // https://forum.unity.com/attachments/graphanimation_1024-gif.240277/
-    // The point is to have a "charging up" effect, where it starts fast, but ends slow
     private float EaseOutCubic(float t)
     {
+        // Apply cubic easing function to create a charging-up effect
         t = t - 1;
         return t * t * t + 1;
+    }
+
+    // Easing function (Quint Out)
+    private float EaseOutQuint(float t)
+    {
+        t--;
+        return 1 + t * t * t * t * t;
     }
 }

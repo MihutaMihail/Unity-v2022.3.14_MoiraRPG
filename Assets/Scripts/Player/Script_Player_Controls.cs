@@ -74,6 +74,7 @@ public class Script_Player_Controls : MonoBehaviour
         }
     }
 
+    // Perform a dash in a specific direction coroutine
     private IEnumerator DashCoroutine()
     {
         DrainStamina(dashCost);
@@ -81,15 +82,26 @@ public class Script_Player_Controls : MonoBehaviour
         canDash = false;
         isDashing = true;
 
-        // Apply velocity for the dash in the specified direction
-        rb.velocity = new Vector2(movementVector.x * dashPower, movementVector.y * dashPower);
+        float elapsedTime = 0f;
 
-        yield return new WaitForSeconds(dashDuration);
+        while (elapsedTime < dashDuration)
+        {
+            elapsedTime += Time.deltaTime;
 
+            // Calculate easing factor for dash movement
+            float dashEaseFactor = EaseOutQuint(elapsedTime / dashDuration);
+
+            // Apply velocity for the dash in the specified direction
+            rb.velocity = new Vector2(movementVector.x * dashPower * dashEaseFactor, movementVector.y * dashPower * dashEaseFactor);
+
+            yield return null;
+        }
+        
         canDash = true;
         isDashing = false;
     }
-    
+
+    // Drain stamina from the stamina bar
     private void DrainStamina(float staminaCost)
     {
         // Drain
@@ -101,10 +113,11 @@ public class Script_Player_Controls : MonoBehaviour
         // Recharge
         // Ensure that there's only one coroutine happening
         if (recharge != null) StopCoroutine(recharge);
-        recharge = StartCoroutine(StaminaRecharge());
+        recharge = StartCoroutine(StaminaRechargeCoroutine());
     }
 
-    private IEnumerator StaminaRecharge()
+    // Recharging stamina coroutine
+    private IEnumerator StaminaRechargeCoroutine()
     {
         yield return new WaitForSeconds(1f);
         
@@ -119,8 +132,16 @@ public class Script_Player_Controls : MonoBehaviour
         }
     }
     
+    // Check if there is enough stamina for a specific action
     private bool EnoughStamina(float staminaCost)
     {
         return stamina >= staminaCost;
+    }
+
+    // Easing function (Quint Out)
+    private float EaseOutQuint(float t)
+    {
+        t--;
+        return 1 + t * t * t * t * t;
     }
 }

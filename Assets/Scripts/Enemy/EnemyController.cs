@@ -4,9 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy_Attack))]
 public class EnemyController : MonoBehaviour
 {
-    public float speed = 5f;
-    public float distanceToAttackPlayer = 4f;
-    public float attackCooldown = 1f;
+    public float speed = 5f, distanceToAttackPlayer = 4f, attackCooldown = 1f;
 
     private Enemy_Follow enemyFollow;
     private Enemy_Attack enemyAttack;
@@ -57,7 +55,7 @@ public class EnemyController : MonoBehaviour
              * the enemy does attack, it will use an updated value of the playerDirection.
              */
             enemyAttack.playerDirection = playerDirection;
-
+            
             if (IsAttackReady()) 
                 canAttack = true;
         }
