@@ -1,22 +1,12 @@
 {
     "NPCs": [
         {
-            "name": "Bob",
-            "directory": "NPC_Archer/",
+            "name": "Gragas The Farmer",
+            "directory": "NPC_Farmer/",
             "dialogueMaster": "DialogueMaster",
             "dialoguesFiles": [
                 "Quest1_Start",
                 "Quest1_End"
-            ]
-        },
-        {
-            "name": "Mario",
-            "directory": "NPC_Wizard/",
-            "dialogueMaster": "DialogueMaster",
-            "dialoguesFiles": [
-                "Quest2_Start",
-                "Quest2_End",
-                "Quest2_End2"
             ]
         }
     ]

@@ -23,7 +23,7 @@ public class Dialogue_Manager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         // Window "Animator" will make use of this value to display / hide the dialogue box
-        animator.SetBool("isOpen", true);
+        animator.SetBool("IsOpen", true);
 
         nameText.text = dialogue.name;
         
@@ -76,7 +76,11 @@ public class Dialogue_Manager : MonoBehaviour
     // End dialogue by hiding the dialogue box
     public void EndDialogue()
     {
-        animator.SetBool("isOpen", false);
+        animator.SetBool("IsOpen", false);
         Cursor.visible = false;
+        if (!GameManager.Instance._isQuestFinished && !GameManager.Instance._isQuestActive)
+        { 
+            GameManager.Instance._isQuestActive = true; 
+        }
     }
 }

@@ -16,21 +16,18 @@ public class JSON_Writer : MonoBehaviour
         NPCList npcList = new NPCList();
         npcList.NPCs = new List<NPCData>();
 
+        // Create main directory
+        if (!Directory.Exists(Application.dataPath + "/Dialogues_Archive/"))
+            Directory.CreateDirectory(Application.dataPath + "/Dialogues_Archive/");
+        
         // Populate list with NPCs
         npcList.NPCs.Add(new NPCData
         {
-            name = "Bob",
-            directory = "NPC_Archer/",
-            dialogueMaster = dialogueMasterName,
+            name = "Gragas The Farmer",
+            directory = "NPC_Farmer/",
+            dialogueMaster = dialogueMasterName, // DON'T CHANGE
+            // Order matters. "Quest1_End" will be read after "Quest1_Start"
             dialoguesFiles = new string[] { "Quest1_Start", "Quest1_End" }
-        });
-
-        npcList.NPCs.Add(new NPCData
-        {
-            name = "Mario",
-            directory = "NPC_Wizard/",
-            dialogueMaster = dialogueMasterName,
-            dialoguesFiles = new string[] { "Quest2_Start", "Quest2_End", "Quest2_End2" }
         });
 
         // Serialize to JSON
@@ -56,9 +53,7 @@ public class JSON_Writer : MonoBehaviour
 
             // Create directory
             if (!Directory.Exists(npcDirPath))
-            {    
                 Directory.CreateDirectory(npcDirPath);
-            }
             
             // This is where we'll stock every dialogue file name in order
             List<string> dialogueMasterList = new List<string>();
@@ -71,9 +66,7 @@ public class JSON_Writer : MonoBehaviour
                 
                 // Create empty file
                 if (!File.Exists(dialogueFilePath))
-                {
                     File.WriteAllText(dialogueFilePath, "");
-                }
                 
                 // Add file to dialogue master
                 dialogueMasterList.Add(dialogueFile);

@@ -1,3 +1,0 @@
-Quest2_Start
-Quest2_End
-Quest2_End2
