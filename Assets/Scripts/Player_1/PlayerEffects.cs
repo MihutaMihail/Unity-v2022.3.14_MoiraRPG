@@ -41,6 +41,7 @@ public class PlayerEffects : MonoBehaviour
                 _iconSpeedBuff.SetActive(true);
                 break;
             case BuffType.AttackSpeed:
+                pc._reloadTime /= multiplier;
                 _iconAttackSpeedBuff.SetActive(true);
                 break;
         }
@@ -60,6 +61,7 @@ public class PlayerEffects : MonoBehaviour
                 _iconSpeedBuff.SetActive(false);
                 break;
             case BuffType.AttackSpeed:
+                pc._reloadTime *= multiplier;
                 _iconAttackSpeedBuff.SetActive(false);
                 break;
         }

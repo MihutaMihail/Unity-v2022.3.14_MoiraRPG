@@ -9,7 +9,7 @@ public class Potion_Speed_Buff : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // collision.gameObject.GetComponent<PlayerEffects>().ApplyBuff(speedMultiplier, buffDuration);
+            collision.gameObject.GetComponent<PlayerEffects>().ApplyBuff(PlayerEffects.BuffType.Speed, speedMultiplier, buffDuration);
             Destroy(gameObject);
         }
     }

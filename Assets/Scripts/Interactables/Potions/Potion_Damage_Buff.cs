@@ -9,7 +9,7 @@ public class Potion_Damage_Buff : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // collision.gameObject.GetComponent<PlayerEffects>().ApplyBuff(damageMultiplier, buffDuration);
+            collision.gameObject.GetComponent<PlayerEffects>().ApplyBuff(PlayerEffects.BuffType.Damage, damageMultiplier, buffDuration) ;
             Destroy(gameObject);
         }   
     }
