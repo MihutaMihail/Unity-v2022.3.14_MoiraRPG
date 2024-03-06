@@ -22,9 +22,9 @@ public class LifeScript : MonoBehaviour
         UpdateHealthBar();
     }
 
-    public void UpdateHp(float amount)
+    public void UpdateHp(float amount, bool heal = false)
     {
-        _currentHp -= amount;
+        _ = heal ? _currentHp += amount : _currentHp -= amount;
         if (_currentHp > 0)
         {
 

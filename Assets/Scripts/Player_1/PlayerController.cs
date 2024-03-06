@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         rb = GetComponent<Rigidbody2D>();
     }
-
+    
     void Update()
     {
         if (isDashing) return;
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         if (isDashing) return;
-
+        
         float currentMoveSpeed = isSprinting ? sprintSpeed : normalSpeed;
 
         // Set player current speed
@@ -98,6 +98,19 @@ public class PlayerController : MonoBehaviour
         // add things if needed...
     }
 
+    public void DamageBuff(float damageMultiplier, float buffDuration)
+    {
+        StartCoroutine(DamageBuffCoroutine(damageMultiplier, buffDuration));
+    }
+
+    private IEnumerator DamageBuffCoroutine(float amount, float duration)
+    {
+        _damage *= amount;
+
+        yield return new WaitForSeconds(duration);
+        _damage /= amount;
+    }
+    
     // Perform a dash in a specific direction coroutine
     private IEnumerator DashCoroutine()
     {
