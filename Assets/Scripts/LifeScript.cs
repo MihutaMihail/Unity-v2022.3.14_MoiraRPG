@@ -10,21 +10,10 @@ public class LifeScript : MonoBehaviour
 
     [SerializeField] public Image _healthBar;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
     private void Awake()
     {
         SetHP(_maxHp);
         UpdateHealthBar();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void SetHP(float amount)
@@ -32,6 +21,7 @@ public class LifeScript : MonoBehaviour
         _currentHp = amount;
         UpdateHealthBar();
     }
+
     public void UpdateHp(float amount)
     {
         _currentHp -= amount;
@@ -39,6 +29,7 @@ public class LifeScript : MonoBehaviour
         {
 
         }
+        // Enemy death
         else if (_currentHp <= 0 && gameObject.tag != "Player")
         {
             // StartCoroutine(EnnemyDeath());
@@ -47,16 +38,20 @@ public class LifeScript : MonoBehaviour
             _currentHp = 0;
             Destroy(gameObject);
         }
+        // Player death
         else if (_currentHp <= 0 && gameObject.tag == "Player")
         {
-            _currentHp = 0;
-            // PlayerDeath();
+            _currentHp = _maxHp;
+            GetComponent<PlayerController>().PlayerDeath();
         }
+
+        // If current HP exceeds max HP, set HP back to max HP
         if (_currentHp > _maxHp)
             _currentHp = _maxHp;
 
         UpdateHealthBar();
     }
+
     public void UpdateHealthBar()
     {
         _healthBar.fillAmount = _currentHp / _maxHp;

@@ -17,15 +17,9 @@ public class FollowTarget : MonoBehaviour
 
     [SerializeField] float _Speed = 1;
 
-
-
-
     private bool _bDoReturnToWaitSpot = false;
     private Vector2 _WaitSpotPosition;
     [SerializeField] float _MaxDistanceFromWaitSpot = 10;
-
-
-
 
     // Start is called before the first frame update
     void Start()

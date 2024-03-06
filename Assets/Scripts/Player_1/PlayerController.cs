@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public GameObject _basicAttackhitbox;
 
     private Vector2 movementVector;
+    private Transform _respawnPoint;
     private Rigidbody2D rb;
     private Coroutine recharge;
     
@@ -30,7 +31,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
-
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
             Attack();
         }
     }
-
+    
     void FixedUpdate()
     {
         if (isDashing) return;
@@ -84,6 +84,18 @@ public class PlayerController : MonoBehaviour
                 canSprint = false;
             }
         }
+    }
+
+    // Update player respawn point
+    public void SetCheckpoint(Transform checkpoint)
+    {
+         _respawnPoint = checkpoint;
+    }
+
+    public void PlayerDeath()
+    {
+        transform.position = _respawnPoint.position;
+        // add things if needed...
     }
 
     // Perform a dash in a specific direction coroutine
@@ -125,6 +137,12 @@ public class PlayerController : MonoBehaviour
         recharge = StartCoroutine(StaminaRechargeCoroutine());
     }
 
+    // Check if there is enough stamina
+    private bool EnoughStamina(float staminaCost)
+    {
+        return stamina >= staminaCost;
+    }
+
     // Recharging stamina coroutine
     private IEnumerator StaminaRechargeCoroutine()
     {
@@ -139,12 +157,6 @@ public class PlayerController : MonoBehaviour
             staminaBar.fillAmount = stamina / maxStamina;
             yield return new WaitForSeconds(0.1f);
         }
-    }
-    
-    // Check if there is enough stamina for a specific action
-    private bool EnoughStamina(float staminaCost)
-    {
-        return stamina >= staminaCost;
     }
 
     void Attack()
