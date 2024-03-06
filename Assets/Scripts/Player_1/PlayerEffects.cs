@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerEffects : MonoBehaviour
 {
@@ -9,48 +8,60 @@ public class PlayerEffects : MonoBehaviour
     [SerializeField] private GameObject _iconSpeedBuff;
     private PlayerController pc;
 
+    public enum BuffType
+    {
+        Damage,
+        Speed,
+        AttackSpeed
+    }
+
     void Start()
     {
-        pc = GetComponent<PlayerController>();    
+        pc = GetComponent<PlayerController>();
+    }
+
+    // Apply any buff
+    public void ApplyBuff(BuffType type, float multiplier, float buffDuration)
+    {
+        StartCoroutine(BuffCoroutine(type, multiplier, buffDuration));
     }
     
-    //
-    // Damage
-    //
-
-    public void DamageBuff(float damageMultiplier, float buffDuration)
+    private IEnumerator BuffCoroutine(BuffType type, float multiplier, float duration)
     {
-        StartCoroutine(DamageBuffCoroutine(damageMultiplier, buffDuration));
-    }
-
-    private IEnumerator DamageBuffCoroutine(float amount, float duration)
-    {
-        pc._damage *= amount;
-        _iconDamageBuff.SetActive(true);
+        // Start buffing
+        switch (type)
+        {
+            case BuffType.Damage:
+                pc._damage *= multiplier;
+                _iconDamageBuff.SetActive(true);
+                break;
+            case BuffType.Speed:
+                pc.normalSpeed *= multiplier;
+                pc.sprintSpeed *= multiplier;
+                _iconSpeedBuff.SetActive(true);
+                break;
+            case BuffType.AttackSpeed:
+                _iconAttackSpeedBuff.SetActive(true);
+                break;
+        }
 
         yield return new WaitForSeconds(duration);
-        pc._damage /= amount;
-        _iconDamageBuff.SetActive(false);
-    }
 
-    //
-    // Speed
-    //
-
-    public void SpeedBuff(float speedMultlipier, float buffDuration)
-    {
-        StartCoroutine(SpeedBuffCoroutine(speedMultlipier, buffDuration));
-    }
-    
-    private IEnumerator SpeedBuffCoroutine(float amount, float duration)
-    {
-        pc.normalSpeed *= amount;
-        pc.sprintSpeed *= amount;
-        _iconSpeedBuff.SetActive(true);
-
-        yield return new WaitForSeconds(duration);
-        pc.normalSpeed /= amount;
-        pc.sprintSpeed /= amount;
-        _iconSpeedBuff.SetActive(false);
+        // Stop buffing
+        switch (type)
+        {
+            case BuffType.Damage:
+                pc._damage /= multiplier;
+                _iconDamageBuff.SetActive(false);
+                break;
+            case BuffType.Speed:
+                pc.normalSpeed /= multiplier;
+                pc.sprintSpeed /= multiplier;
+                _iconSpeedBuff.SetActive(false);
+                break;
+            case BuffType.AttackSpeed:
+                _iconAttackSpeedBuff.SetActive(false);
+                break;
+        }
     }
 }
