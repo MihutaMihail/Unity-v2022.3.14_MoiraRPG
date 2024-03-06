@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(PlayerEffects))]
 public class PlayerController : MonoBehaviour
 {
     // Movement
@@ -92,23 +93,10 @@ public class PlayerController : MonoBehaviour
          _respawnPoint = checkpoint;
     }
 
+    // Player death instructions
     public void PlayerDeath()
     {
         transform.position = _respawnPoint.position;
-        // add things if needed...
-    }
-
-    public void DamageBuff(float damageMultiplier, float buffDuration)
-    {
-        StartCoroutine(DamageBuffCoroutine(damageMultiplier, buffDuration));
-    }
-
-    private IEnumerator DamageBuffCoroutine(float amount, float duration)
-    {
-        _damage *= amount;
-
-        yield return new WaitForSeconds(duration);
-        _damage /= amount;
     }
     
     // Perform a dash in a specific direction coroutine

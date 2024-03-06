@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Potion_DamageBuff : MonoBehaviour
+public class Potion_Damage_Buff : MonoBehaviour
 {
     [SerializeField] private float damageMultiplier;
     [SerializeField] private float buffDuration;
@@ -9,7 +9,7 @@ public class Potion_DamageBuff : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerController>().DamageBuff(damageMultiplier, buffDuration);
+            collision.gameObject.GetComponent<PlayerEffects>().DamageBuff(damageMultiplier, buffDuration);
             Destroy(gameObject);
         }
     }
