@@ -80574,7 +80574,7 @@ GameObject:
   - component: {fileID: 1523544572}
   - component: {fileID: 1523544575}
   - component: {fileID: 1523544574}
-  - component: {fileID: 1523544573}
+  - component: {fileID: 1523544576}
   m_Layer: 0
   m_Name: Potion_Buff_AttackSpeed
   m_TagString: Untagged
@@ -80597,20 +80597,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 118887580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1523544573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1523544571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e281f0d90dc51b342bea2f1905a4629b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackSpeedMultiplier: 4
-  buffDuration: 7
 --- !u!61 &1523544574
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -80708,6 +80694,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1523544576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523544571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f01cc5fbc2f5cf4c8a5665dd83e555a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  affectedStat: 1
+  multiplier: 1.25
+  effectType: 0
+  duration: 5
 --- !u!1 &1586101594
 GameObject:
   m_ObjectHideFlags: 0
@@ -80773,7 +80775,6 @@ GameObject:
   - component: {fileID: 1630985155}
   - component: {fileID: 1630985157}
   - component: {fileID: 1630985156}
-  - component: {fileID: 1630985158}
   m_Layer: 0
   m_Name: Potion_Buff_Damage
   m_TagString: Untagged
@@ -80893,20 +80894,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1630985158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630985154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1cab7338373758418ccaf1b69c14ccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageMultiplier: 1.5
-  buffDuration: 7
 --- !u!1 &1640219743
 GameObject:
   m_ObjectHideFlags: 0
@@ -81209,7 +81196,6 @@ GameObject:
   - component: {fileID: 1765657884}
   - component: {fileID: 1765657887}
   - component: {fileID: 1765657886}
-  - component: {fileID: 1765657888}
   m_Layer: 0
   m_Name: Potion_Buff_Speed
   m_TagString: Untagged
@@ -81329,20 +81315,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1765657888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1765657883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593eb8044dcf9594790eb3e2dcc0a24a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedMultiplier: 1.5
-  buffDuration: 7
 --- !u!114 &1789820102
 MonoBehaviour:
   m_ObjectHideFlags: 0
