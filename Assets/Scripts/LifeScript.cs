@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class LifeScript : MonoBehaviour
 
     public float _currentHp;
 
+    [SerializeField] private bool _healthRegen = false;
+    
     [SerializeField] public Image _healthBar;
 
     private void Awake()
@@ -15,7 +18,7 @@ public class LifeScript : MonoBehaviour
         SetHP(_maxHp);
         UpdateHealthBar();
     }
-
+    
     public void SetHP(float amount)
     {
         _currentHp = amount;
@@ -50,6 +53,32 @@ public class LifeScript : MonoBehaviour
             _currentHp = _maxHp;
 
         UpdateHealthBar();
+    }
+    
+    public void HealthRegen(float amount, float tickInterval, float duration)
+    {
+       if (!_healthRegen)
+            StartCoroutine(HealthRegenCoroutine(amount, tickInterval, duration));
+    }
+    
+    private IEnumerator HealthRegenCoroutine(float amount, float interval, float duration)
+    {
+        Debug.Log("START health regen");
+        _healthRegen = true;
+        float elapsedTime = 0f;
+        
+        while (elapsedTime < duration)
+        {
+            _currentHp += amount;
+            if (_currentHp > _maxHp) _currentHp = _maxHp;
+            UpdateHealthBar();
+
+            yield return new WaitForSeconds(interval);
+            elapsedTime += interval;
+        }
+
+        Debug.Log("STOP health regen");
+        _healthRegen = false;
     }
 
     public void UpdateHealthBar()

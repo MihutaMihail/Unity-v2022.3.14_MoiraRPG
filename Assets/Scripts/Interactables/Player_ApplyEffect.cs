@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ApplyEffectToPlayer : MonoBehaviour
+public class Player_ApplyEffect : MonoBehaviour
 {
     [SerializeField] private PlayerEffects.AffectedStat affectedStat;
     [SerializeField] private float multiplier;
