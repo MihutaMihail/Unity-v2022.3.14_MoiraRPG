@@ -9,7 +9,7 @@ public class LifeScript : MonoBehaviour
 
     public float _currentHp;
 
-    [SerializeField] private bool _healthRegen = false;
+    private bool _healthRegen = false;
     
     [SerializeField] public Image _healthBar;
 
