@@ -19,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Enemy"))
             {
-                collision.gameObject.GetComponent<LifeScript>().UpdateHp(GameManager.Instance._Player.GetComponent<Script_Player_Controls>()._damage);
+                collision.gameObject.GetComponent<LifeScript>().UpdateHp(GameManager.Instance._player.GetComponent<PlayerController>()._damage);
             }
         }
     }
