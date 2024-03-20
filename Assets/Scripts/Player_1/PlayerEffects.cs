@@ -26,7 +26,8 @@ public class PlayerEffects : MonoBehaviour
     }
 
     private Dictionary<AffectedStat, Dictionary<EffectType, GameObject>> iconMap;
-
+    private Dictionary<(AffectedStat, EffectType), Coroutine> activeCoroutines;
+    
     void Start()
     {
         pc = GetComponent<PlayerController>();
@@ -38,22 +39,36 @@ public class PlayerEffects : MonoBehaviour
             {AffectedStat.Speed, new Dictionary<EffectType, GameObject>() { {EffectType.Buff, _iconSpeedBuff}, {EffectType.Debuff, _iconSpeedDebuff}}},
             {AffectedStat.AttackSpeed, new Dictionary<EffectType, GameObject>() { {EffectType.Buff, _iconAttackSpeedBuff}, {EffectType.Debuff, _iconAttackSpeedDebuff}}}
         };
+
+        // Initialize activeCoroutines
+        activeCoroutines = new Dictionary<(AffectedStat, EffectType), Coroutine>();
     }
     
     // Apply effect to the player
     public void ApplyEffect(AffectedStat stat, float multiplier, EffectType type, float duration)
     {
-        StartCoroutine(ApplyEffectCoroutine(stat, multiplier, type, duration));
+        // Check if effect is already active
+        var key = (stat, type);
+        if (activeCoroutines.ContainsKey(key))
+        {
+            StopCoroutine(activeCoroutines[key]);
+            RemoveEffectChanges(stat, multiplier, type);
+        }
+        
+        Coroutine coroutine = StartCoroutine(ApplyEffectCoroutine(stat, multiplier, type, duration));
+        activeCoroutines[key] = coroutine; // Store the coroutine instance
     }
+
     private IEnumerator ApplyEffectCoroutine(AffectedStat stat, float multiplier, EffectType type, float duration)
     {
         // Apply effects
         ApplyEffectChanges(stat, multiplier, type);
 
         yield return new WaitForSeconds(duration);
-
+        
         // Removes effects
         RemoveEffectChanges(stat, multiplier, type);
+        activeCoroutines.Remove((stat,type)); // Remove the coroutine instance
     }
 
     private void ApplyEffectChanges(AffectedStat stat, float multiplier, EffectType type)
