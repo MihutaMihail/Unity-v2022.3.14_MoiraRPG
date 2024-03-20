@@ -63,7 +63,6 @@ public class LifeScript : MonoBehaviour
     
     private IEnumerator HealthRegenCoroutine(float amount, float interval, float duration)
     {
-        Debug.Log("START health regen");
         _healthRegen = true;
         float elapsedTime = 0f;
         
@@ -77,7 +76,6 @@ public class LifeScript : MonoBehaviour
             elapsedTime += interval;
         }
 
-        Debug.Log("STOP health regen");
         _healthRegen = false;
     }
 

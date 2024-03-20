@@ -1,13 +1,31 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    List<Collider2D> _ColliderHit = new();
+    ContactFilter2D contactFilter2D = new ContactFilter2D();
+
+    [SerializeField] PolygonCollider2D _collider;
+
+
+    public void Activated()
     {
-        // Debug.Log("Hit");
-        if (collision.gameObject.CompareTag("Enemy"))
+        gameObject.SetActive(true);
+
+        Physics2D.OverlapCollider(_collider, contactFilter2D, _ColliderHit);
+
+        foreach (Collider2D collision in _ColliderHit)
         {
-            collision.gameObject.GetComponent<LifeScript>().UpdateHp(GameManager.Instance._player.GetComponent<PlayerController>()._damage);
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                collision.gameObject.GetComponent<LifeScript>().UpdateHp(GameManager.Instance._Player.GetComponent<Script_Player_Controls>()._damage);
+            }
         }
+    }
+
+    public void Desactivated()
+    {
+        gameObject.SetActive(false);
     }
 }

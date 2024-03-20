@@ -26,6 +26,7 @@ public class PlayerEffects : MonoBehaviour
     }
 
     private Dictionary<AffectedStat, Dictionary<EffectType, GameObject>> iconMap;
+
     void Start()
     {
         pc = GetComponent<PlayerController>();

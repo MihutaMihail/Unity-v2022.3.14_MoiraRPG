@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Player_UpdateHealth : MonoBehaviour
 {
-    [SerializeField] private int health;
+
+    [SerializeField][Min(0)] private int health;
     [SerializeField] private bool heal;
 
     private void OnTriggerEnter2D(Collider2D collision)
