@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementVector;
     private Transform _respawnPoint;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
     private Coroutine recharge;
     
     private bool playerMoving = true;
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.visible = false;
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
     
     void Update()
@@ -48,20 +50,19 @@ public class PlayerController : MonoBehaviour
 
         // Check for player movement
         playerMoving = movementVector == new Vector2(0f, 0f) ? false : true;
+
+        // Flip player depending in which direction it moves
+        sr.flipX = (playerMoving && movementVector.x < Vector3.zero.x) ? true : false;
         
         // Dash
         if (Input.GetKeyDown(KeyCode.Space) && canDash && playerMoving)
-        {
             // if (EnoughStamina(dashCost)) StartCoroutine(DashCoroutine());
-        }
         
         // Sprint
         isSprinting = (Input.GetKey(KeyCode.LeftShift) && canSprint && playerMoving) ? true : false;
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && _canAttack)
-        {
             Attack();
-        }
     }
     
     void FixedUpdate()

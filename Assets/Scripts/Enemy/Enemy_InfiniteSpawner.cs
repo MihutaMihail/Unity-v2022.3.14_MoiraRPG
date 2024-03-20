@@ -9,19 +9,20 @@ public class Enemy_Spawner : MonoBehaviour
     [SerializeField] [Min(0)] private float timeBetweenWaves = 5f;
     [SerializeField] [Min(0)] private float spawnOffsetRange = 2f;
 
-    // FOR TESTING
-    void Start()
+    // FOR TESTING PURPOSES
+    // IN PRACTICE, ANOTHER GAMEOBJECT WILL CALL THE FUNCTION StartSpawner()
+    /*void Start()
     {
         StartSpawner();
-    }
+    }*/
 
     public void StartSpawner()
     {
-        StartCoroutine(StartSpawnerCoroutine(nbEnemy, timeBetweenWaves, spawnOffsetRange));
+        StartCoroutine(EnemySpawnerCoroutine(nbEnemy, timeBetweenWaves, spawnOffsetRange));
     }
 
     // Spawn enemies indefinitely
-    private IEnumerator StartSpawnerCoroutine(int nbEnemy, float timeBetweenWaves, float spawnOffsetRange)
+    private IEnumerator EnemySpawnerCoroutine(int nbEnemy, float timeBetweenWaves, float spawnOffsetRange)
     {
         while (true)
         {
@@ -34,14 +35,13 @@ public class Enemy_Spawner : MonoBehaviour
                 // Clone a new enemy from a pre-existing prefab
                 Instantiate(enemy, new Vector3(randomOffsetPositionX, randomOffsetPositionY, 0), Quaternion.identity);
             }
-            
             yield return new WaitForSeconds(timeBetweenWaves);
         }
     }
 
     public void StopSpawner()
     {
-        StopCoroutine(StartSpawnerCoroutine(nbEnemy, timeBetweenWaves, spawnOffsetRange));
+        StopCoroutine(EnemySpawnerCoroutine(nbEnemy, timeBetweenWaves, spawnOffsetRange));
     }
 
     public void DestroySpawner()
